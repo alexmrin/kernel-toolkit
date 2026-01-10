@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-kernel_toolkit.egg-info/PKG-INFO
-kernel_toolkit.egg-info/SOURCES.txt
-kernel_toolkit.egg-info/dependency_links.txt
-kernel_toolkit.egg-info/requires.txt
-kernel_toolkit.egg-info/top_level.txt
