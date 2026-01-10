@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: kernel-toolkit
+Version: 0.0.1
+Summary: Kernel toolkit for developing and profiling trition/cuda kernels.
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.10
+Requires-Dist: triton>=3.1

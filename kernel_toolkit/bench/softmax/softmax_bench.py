@@ -2,8 +2,8 @@ import os
 import argparse
 import torch
 import triton
-from bench.correctness import test_correctness
-from kernels.softmax.softmax_v1 import softmax_v1
+from kernel_toolkit.bench.correctness import test_correctness
+from kernel_toolkit.kernels.softmax.softmax_v1 import softmax_v1
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()

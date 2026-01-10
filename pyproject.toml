@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kernel-toolkit"
+version = "0.0.1"
+description = "Kernel toolkit for developing and profiling trition/cuda kernels."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.9",
+    "triton>=3.0",
+]
+
+[tool.setuptools]
+packages = ["kernel_toolkit"]

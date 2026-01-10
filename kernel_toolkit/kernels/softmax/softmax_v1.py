@@ -1,7 +1,7 @@
 import torch
 import triton
 import triton.language as tl
-from core.metadata import TritonKernelInspector, DeviceProperties
+from kernel_toolkit.core.metadata import TritonKernelInspector, DeviceProperties
 
 
 @triton.jit
