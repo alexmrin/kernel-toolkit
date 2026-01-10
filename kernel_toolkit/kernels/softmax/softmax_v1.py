@@ -58,8 +58,7 @@ def softmax_v1(x: torch.Tensor, verbose: bool = False) -> torch.Tensor:
     
     num_programs = min(stats.num_programs, n_rows)
     compiled[(num_programs, 1, 1)](
-        x, x.stride(0), y.stride(0), y, n_rows, n_cols,
-        BLOCK_SIZE=BLOCK_SIZE, num_stages=num_stages
+        x, x.stride(0), y.stride(0), y, n_rows, n_cols, BLOCK_SIZE, num_stages
     )
     
     return y

@@ -41,7 +41,7 @@ def bench_throughput(save_path: str) -> None:
     
     out_dir = os.path.join(save_path, "throughput")
     os.makedirs(out_dir, exist_ok=True)
-    benchmark.run(show_plots=True, print_data=True, save_path=out_dir)
+    benchmark.run(show_plots=False, print_data=True, save_path=out_dir)
 
 if __name__ == "__main__":
     parser = build_parser()

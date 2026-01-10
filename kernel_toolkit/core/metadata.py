@@ -10,6 +10,8 @@ class DeviceProperties:
     def get(cls) -> Dict[str, Any]:
         if cls._props is None:
             device_id = torch.cuda.current_device()
+            import triton.runtime.driver as driver
+            raw_metadata = driver.active.utils.get_device_properties(device_id) #pyright: ignore
             props = torch.cuda.get_device_properties(device_id)
             major, minor = torch.cuda.get_device_capability(device_id)
             
@@ -21,9 +23,9 @@ class DeviceProperties:
             
             cls._props = {
                 "num_sm": props.multi_processor_count,
-                "max_regs_per_sm": props.regs_per_block,
+                "max_regs_per_sm": raw_metadata.get("max_num_regs"),
                 "max_threads_per_sm": props.max_threads_per_multi_processor,
-                "max_smem_per_sm": props.max_shared_memory_per_multi_processor,
+                "max_smem_per_sm": props.shared_memory_per_multiprocessor,
                 "warp_size": 32,
                 "capability": (major, minor),
                 "max_blocks_per_sm": cc_map.get((major, minor), 16),
