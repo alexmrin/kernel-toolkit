@@ -28,6 +28,6 @@ def test_correctness(
             print(f"Passed shape={shape}")
         else:
             max_diff = (y_kernel - y_baseline).abs().max().item()
-            raise AssertionError(f"✗ Failed shape={shape}, max_diff={max_diff}")
+            raise AssertionError(f"Failed shape={shape}, max_diff={max_diff} for {kernel.__name__} kernel.")
     
-    print(f"All {len(shapes)} correctness tests passed!")
+    print(f"All {len(shapes)} correctness tests passed for {kernel.__name__} kernel!")
