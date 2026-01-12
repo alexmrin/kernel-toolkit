@@ -4,6 +4,7 @@ import torch
 import triton
 from kernel_toolkit.bench.correctness import test_correctness
 from kernel_toolkit.kernels.softmax.softmax_v1 import softmax_v1
+from kernel_toolkit.kernels.softmax.softmax_v2 import softmax_v2
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
@@ -17,9 +18,9 @@ def bench_throughput(save_path: str) -> None:
             x_names=['N'],
             x_vals=[128 * i for i in range(2, 100)],
             line_arg='provider',
-            line_vals=['triton', 'torch'],
-            line_names=["Triton", "Torch"],
-            styles=[('blue', '-'), ('green', '-')],
+            line_vals=['triton_v1', 'triton_v2', 'torch'],
+            line_names=["Triton_v1", 'Triton_v2', "Torch"],
+            styles=[('blue', '-'), ('red', '-'), ('green', '-')],
             ylabel="GB/s",
             plot_name="softmax-performance",
             args={'M': 4096},
@@ -30,8 +31,10 @@ def bench_throughput(save_path: str) -> None:
         
         if provider == 'torch':
             ms = triton.testing.do_bench(lambda: torch.softmax(x, dim=-1), quantiles=[0.5, 0.2, 0.8])
-        elif provider == 'triton':
+        elif provider == 'triton_v1':
             ms = triton.testing.do_bench(lambda: softmax_v1(x), quantiles=[0.5, 0.2, 0.8])
+        elif provider == 'triton_v2':
+            ms =  triton.testing.do_bench(lambda: softmax_v2(x), quantiles=[0.5, 0.2, 0.8])
         else:
             raise ValueError(f"Unknown provider: {provider}")
         
@@ -51,6 +54,12 @@ if __name__ == "__main__":
     
     test_correctness(
         kernel=softmax_v1,
+        baseline=torch.softmax,
+        baseline_kwargs={"dim": -1}
+    )
+    
+    test_correctness(
+        kernel=softmax_v2,
         baseline=torch.softmax,
         baseline_kwargs={"dim": -1}
     )

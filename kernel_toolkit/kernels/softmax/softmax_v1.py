@@ -3,7 +3,9 @@ import triton
 import triton.language as tl
 from kernel_toolkit.core.metadata import TritonKernelInspector, DeviceProperties
 
-
+"""
+    Row-wise softmax, where each program will compute a single row.
+"""
 @triton.jit
 def softmax_kernel_v1(
     x_ptr,
