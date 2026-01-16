@@ -1,2 +1,5 @@
 triton/
 kernel_toolkit.*
+modal_launcher/
+local_results/
+__pycache__

@@ -46,7 +46,7 @@ def bench_throughput(save_path: str) -> None:
     os.makedirs(out_dir, exist_ok=True)
     benchmark.run(show_plots=False, print_data=True, save_path=out_dir)
 
-if __name__ == "__main__":
+def main():
     parser = build_parser()
     args = parser.parse_args()
     
@@ -65,3 +65,6 @@ if __name__ == "__main__":
     )
     
     bench_throughput(save_path=args.save_dir)
+    
+if __name__ == "__main__":
+    main()

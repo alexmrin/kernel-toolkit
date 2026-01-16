@@ -113,9 +113,7 @@ def flash_attention_fwd_kernel(
     o_tile = (o_tile / l[:, None]).to(input_dtype)
     
     tl.store(o_tile_ptrs, o_tile, boundary_check=(0, ))
-        
-_inspector = TritonKernelInspector(flash_attention_fwd_kernel)
-        
+                
 def flash_attention_fwd(
     q: torch.Tensor, 
     k: torch.Tensor, 
@@ -123,7 +121,6 @@ def flash_attention_fwd(
     softmax_scale: float,
     *,
     causal: bool = False,
-    verbose: bool = False,
 ) -> torch.Tensor:
     assert q.shape == k.shape == v.shape, "QKV tensors must all have the same shape."
     assert q.ndim == 3, "QKV tensors must all have 3 dimensions."

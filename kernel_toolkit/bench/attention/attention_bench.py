@@ -92,7 +92,7 @@ def bench_attention(save_path: str, causal: bool, dtype: torch.dtype) -> None:
     benchmark.run(show_plots=False, print_data=True, save_path=out_dir)
 
 
-if __name__ == "__main__":
+def main():
     args = build_parser().parse_args()
     os.makedirs(args.save_dir, exist_ok=True)
 
@@ -127,3 +127,6 @@ if __name__ == "__main__":
     )
 
     bench_attention(save_path=args.save_dir, causal=args.causal, dtype=dtype)
+    
+if __name__ == "__main__":
+    main()

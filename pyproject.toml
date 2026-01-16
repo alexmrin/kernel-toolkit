@@ -11,7 +11,12 @@ requires-python = ">=3.12"
 dependencies = [
     "torch>=2.9",
     "triton>=3.0",
+    "modal>=1.3.0",
+    "tqdm",
+    "numpy>=1.26.4,<2.0.0",
+    "matplotlib>=3.8.0",
+    "pandas>=2.2.0",
 ]
 
 [tool.setuptools]
-packages = ["kernel_toolkit"]
+packages = ["kernel_toolkit", "modal_helper"]
